@@ -1,5 +1,6 @@
 package com.example.employee_service.controller;
 
+import com.example.employee_service.dto.APIResponseDto;
 import com.example.employee_service.dto.EmployeeeDto;
 import com.example.employee_service.entity.Employee;
 import com.example.employee_service.repository.EmployeeRepository;
@@ -22,14 +23,15 @@ public class EmployeeController {
         EmployeeeDto resEmp = new EmployeeeDto(emp.getId(),
                 emp.getFirstName(),
                 emp.getLastName(),
-                emp.getEmail());
+                emp.getEmail(),
+                emp.getDepartmentCode());
         return new ResponseEntity<>(resEmp,HttpStatus.CREATED);
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<EmployeeeDto> getEmployeeData(@PathVariable("id") Long employeeeId){
-        EmployeeeDto employeeeDto = employeeService.getEmployeeById(employeeeId);
-        return new ResponseEntity<>(employeeeDto, HttpStatus.OK);
+    public ResponseEntity<APIResponseDto> getEmployeeData(@PathVariable("id") Long employeeeId){
+        APIResponseDto apiResponseDto = employeeService.getEmployeeById(employeeeId);
+        return new ResponseEntity<>(apiResponseDto, HttpStatus.OK);
     }
 
 
