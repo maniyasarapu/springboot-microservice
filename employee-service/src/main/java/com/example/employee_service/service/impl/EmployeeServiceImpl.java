@@ -5,7 +5,7 @@ import com.example.employee_service.dto.DepartmentDto;
 import com.example.employee_service.dto.EmployeeeDto;
 import com.example.employee_service.entity.Employee;
 import com.example.employee_service.repository.EmployeeRepository;
-//import com.example.employee_service.service.APIClient;
+import com.example.employee_service.service.APIClient;
 import com.example.employee_service.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,11 +22,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 //    @Autowired
 //    private RestTemplate restTemplate;
 
-    @Autowired
-    private WebClient webClient;
-
 //    @Autowired
-//    private APIClient apiClient;
+//    private WebClient webClient;
+
+    @Autowired
+    private APIClient apiClient;
 
     @Override
     public Employee saveEmployeeData(EmployeeeDto employeeeDto) {
@@ -47,12 +47,12 @@ public class EmployeeServiceImpl implements EmployeeService {
        // ResponseEntity<DepartmentDto> responseEntity =restTemplate.getForEntity("http://localhost:8080/api/departments/get-department/"+emp.getDepartmentCode(), DepartmentDto.class);
        // DepartmentDto departmentDto = responseEntity.getBody();
 
-        DepartmentDto departmentDto = webClient.get().uri("http://localhost:8080/api/departments/get-department/"+emp.getDepartmentCode())
-                .retrieve()
-                .bodyToMono(DepartmentDto.class)
-                .block();
+//        DepartmentDto departmentDto = webClient.get().uri("http://localhost:8080/api/departments/get-department/"+emp.getDepartmentCode())
+//                .retrieve()
+//                .bodyToMono(DepartmentDto.class)
+//                .block();
 
-//       DepartmentDto departmentDto = apiClient.getDepartmentByCode(emp.getDepartmentCode());
+       DepartmentDto departmentDto = apiClient.getDepartmentByCode(emp.getDepartmentCode());
 
         EmployeeeDto employeeeDto = new EmployeeeDto(emp.getId(),
                 emp.getFirstName(),
